@@ -3,6 +3,9 @@ module.exports = {
   env: {
     node: true
   },
+  globals: {
+    DEBUG: true
+  },
   extends: [
     'plugin:vue/vue3-essential',
     '@vue/standard',
