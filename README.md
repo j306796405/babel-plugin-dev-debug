@@ -1,24 +1,51 @@
 # babel-plugin-dev-debug
 
-## Project setup
-```
-yarn install
+an babel plugin that for dev debug
+
+## why
+
+Sometimes we need to write some logic in the development environment for debugging and development purposes
+
+However, we don't want the debug code to be released to the production environment
+
+This plugin is designed to solve this problem
+
+## Install
+
+```shell
+npm i babel-plugin-dev-debug
 ```
 
-### Compiles and hot-reloads for development
-```
-yarn serve
+## Usage
+
+add babel-plugin-dev-debug plugin to babel.config.js
+
+```js
+// babel.config.js
+module.exports = {
+  plugins: ["dev-debug"],
+};
 ```
 
-### Compiles and minifies for production
-```
-yarn build
+in you code
+
+```js
+if (DEBUG) {
+  // do something for debug
+  // removed in production env
+  const a = 10;
+  const b = 20;
+  console.log(a + b);
+}
 ```
 
-### Lints and fixes files
-```
-yarn lint
-```
+if you use eslint you must be add DEBUG to globals to eslint.config.js
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```js
+// .eslintrc.js
+module.exports = {
+  globals: {
+    DEBUG: true,
+  },
+};
+```

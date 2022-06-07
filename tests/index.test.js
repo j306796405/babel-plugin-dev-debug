@@ -9,17 +9,20 @@ const inputCode = `
         }
         `
 
-process.env.NODE_ENV = 'development'
+describe("babel-plugin-dev-debug", () => {
+  it("dev", () => {
+    // input
+    process.env.NODE_ENV = "development";
 
-const { code } = babel.transform(inputCode, { plugins: [plugin] })
-console.log(code)
-// describe('babel-plugin-dev-debug', () => {
-//   it('dev', () => {
-//     // input
-//     process.env.NODE_ENV = 'development'
+    const { code } = babel.transform(inputCode, { plugins: [plugin] });
+    expect(code).toMatchSnapshot();
+  });
 
-//     const { code } = babel.transform(inputCode, { plugins: [plugin] })
-//     console.log(code)
-//     // expect(code).toMatchSnapshot()
-//   })
-// })
+  it("prod", () => {
+    // input
+    process.env.NODE_ENV = "production";
+
+    const { code } = babel.transform(inputCode, { plugins: [plugin] });
+    expect(code).toMatchSnapshot();
+  });
+});
